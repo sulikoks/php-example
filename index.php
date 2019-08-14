@@ -7,8 +7,10 @@ define('ROOT', dirname(__FILE__)); // Определение корня, для 
 function binarySearchByKey($file, $isk_var) { // Определяем функцию
   $handle = fopen($file, "r"); // Открываем файл для чтения
   while (!feof($handle)) { // Цикл пока открыт файл
-    $string = fgets($handle, 4096);  // Записываем в строку содержимое файла
+    $string = fgets($handle,4000);  // Записываем в строку содержимое файла
     //
+    //echo ($handle);
+    //echo ($string);
 	$explodedString = explode('\x0A', $string);  // Записываем в массив и разделяем строку разделителем
     array_pop($explodedString);  // Удаление последнего пустого элемента массива
     foreach ($explodedString as $key => $value) { //Для каждого элемента массива
@@ -33,11 +35,15 @@ function binarySearchByKey($file, $isk_var) { // Определяем функц
   fclose($handle); // Закрываем файл
   return 'undef';  // Возврат "undef" если ненайден ключ
 }
-echo "Если ключ есть в файле: ";
+ // Обращение к функции и вывод
+echo "Если ключ222 есть в файле: ";
 $isk_var = 'ключ222';  // Ключ которые есть
 $file = ROOT.'/keynumeric.txt'; // Путь к файлу
 echo binarySearchByKey($file, $isk_var)."</br>"; // Обращение к функции и вывод
-echo "Если ключа нет в файле: ";
+echo "Если ключ31 есть в файле: ";
+$isk_var = 'ключ31'; // Ключ которого нет
+echo binarySearchByKey($file, $isk_var)."</br>";
+echo "Если ключ331 и его нет в файле: ";
 $isk_var = 'ключ331'; // Ключ которого нет
 echo binarySearchByKey($file, $isk_var)."</br>"; // Обращение к функции и вывод
 
